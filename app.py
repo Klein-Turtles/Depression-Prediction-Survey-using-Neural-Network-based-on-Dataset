@@ -47,41 +47,55 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    # Muat model dan preprocessor
-    model = load_model()
-    preprocessor = load_preprocessor()
+    try:
+        # Debugging: Log permintaan POST
+        print("Received POST request with form data:", request.form)
 
-    # Ambil data dari form
-    input_data = {
-        'Gender': request.form['gender'],
-        'Age': int(request.form['age']),
-        'Work Pressure': float(request.form['work_pressure']),
-        'Job Satisfaction': float(request.form['job_satisfaction']),
-        'Sleep Duration': request.form['sleep_duration'],
-        'Dietary Habits': request.form['dietary_habits'],
-        'Have you ever had suicidal thoughts ?': request.form['suicidal_thoughts'],
-        'Work Hours': int(request.form['work_hours']),
-        'Financial Stress': int(request.form['financial_stress']),
-        'Family History of Mental Illness': request.form['family_history']
-    }
+        # Muat model dan preprocessor
+        model = load_model()
+        preprocessor = load_preprocessor()
 
-    # Buat DataFrame dan lakukan preprocessing
-    input_df = pd.DataFrame([input_data])
-    processed_input = preprocessor.transform(input_df)
+        # Ambil data dari form
+        input_data = {
+            'Gender': request.form['gender'],
+            'Age': int(request.form['age']),
+            'Work Pressure': float(request.form['work_pressure']),
+            'Job Satisfaction': float(request.form['job_satisfaction']),
+            'Sleep Duration': request.form['sleep_duration'],
+            'Dietary Habits': request.form['dietary_habits'],
+            'Have you ever had suicidal thoughts ?': request.form['suicidal_thoughts'],
+            'Work Hours': int(request.form['work_hours']),
+            'Financial Stress': int(request.form['financial_stress']),
+            'Family History of Mental Illness': request.form['family_history']
+        }
 
-    # Ubah hasil preprocessing menjadi dense array
-    if hasattr(processed_input, "toarray"):
-        processed_input = processed_input.toarray()
+        # Debugging: Log input data
+        print("Input data:", input_data)
 
-    # Konversi ke PyTorch tensor
-    input_tensor = torch.tensor(processed_input, dtype=torch.float32)
+        # Buat DataFrame dan lakukan preprocessing
+        input_df = pd.DataFrame([input_data])
+        processed_input = preprocessor.transform(input_df)
 
-    # Prediksi dengan model
-    with torch.no_grad():
-        prediction = model(input_tensor)
-        prediction_label = "Depressed" if prediction.item() > 0.5 else "Not Depressed"
-    
-    return render_template('result.html', prediction=prediction_label)
+        # Ubah hasil preprocessing menjadi dense array
+        if hasattr(processed_input, "toarray"):
+            processed_input = processed_input.toarray()
+
+        # Konversi ke PyTorch tensor
+        input_tensor = torch.tensor(processed_input, dtype=torch.float32)
+
+        # Prediksi dengan model
+        with torch.no_grad():
+            prediction = model(input_tensor)
+            prediction_label = "Depressed" if prediction.item() > 0.5 else "Not Depressed"
+        
+        # Debugging: Log hasil prediksi
+        print("Prediction:", prediction_label)
+
+        return render_template('result.html', prediction=prediction_label)
+    except Exception as e:
+        # Log error dan kembalikan pesan error
+        print("Error occurred:", str(e))
+        return f"Error: {str(e)}", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
