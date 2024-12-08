@@ -51,11 +51,11 @@ def submit():
         preprocessor = load_preprocessor()
 
         input_data = {
-            'Gender': request.form['gender'],
-            'Age': int(request.form['age']),
-            'Work Pressure': float(request.form['work_pressure']),
-            'Job Satisfaction': float(request.form['job_satisfaction']),
-            'Sleep Duration': request.form['sleep_duration'],
+            'Jenis Kelamin': request.form['gender'],
+            'Umur': int(request.form['age']),
+            'Tekanan Kerja': float(request.form['work_pressure']),
+            'Kepuasan Kerja': float(request.form['job_satisfaction']),
+            'Durasi Tidur': request.form['sleep_duration'],
             'Dietary Habits': request.form['dietary_habits'],
             'Have you ever had suicidal thoughts ?': request.form['suicidal_thoughts'],
             'Work Hours': int(request.form['work_hours']),
