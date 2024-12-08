@@ -5,11 +5,9 @@ import torch.nn as nn
 import joblib
 import numpy as np
 
-# Path ke model dan preprocessor
 MODEL_PATH = './model/neural_network_model.pth'
 PREPROCESSOR_PATH = './model/preprocessor.pkl'
 
-# Kelas Neural Network
 class NeuralNetwork(nn.Module):
     def __init__(self, input_size):
         super(NeuralNetwork, self).__init__()
@@ -29,9 +27,8 @@ class NeuralNetwork(nn.Module):
         x = self.sigmoid(x)
         return x
 
-# Muat model dan preprocessor
 def load_model():
-    model = NeuralNetwork(input_size=84)  # Ubah sesuai jumlah fitur
+    model = NeuralNetwork(input_size=84) 
     model.load_state_dict(torch.load(MODEL_PATH))
     model.eval()
     return model
@@ -48,14 +45,11 @@ def home():
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
-        # Debugging: Log permintaan POST
         print("Received POST request with form data:", request.form)
 
-        # Muat model dan preprocessor
         model = load_model()
         preprocessor = load_preprocessor()
 
-        # Ambil data dari form
         input_data = {
             'Gender': request.form['gender'],
             'Age': int(request.form['age']),
@@ -69,31 +63,24 @@ def submit():
             'Family History of Mental Illness': request.form['family_history']
         }
 
-        # Debugging: Log input data
         print("Input data:", input_data)
 
-        # Buat DataFrame dan lakukan preprocessing
         input_df = pd.DataFrame([input_data])
         processed_input = preprocessor.transform(input_df)
 
-        # Ubah hasil preprocessing menjadi dense array
         if hasattr(processed_input, "toarray"):
             processed_input = processed_input.toarray()
 
-        # Konversi ke PyTorch tensor
         input_tensor = torch.tensor(processed_input, dtype=torch.float32)
 
-        # Prediksi dengan model
         with torch.no_grad():
             prediction = model(input_tensor)
             prediction_label = "Depressed" if prediction.item() > 0.5 else "Not Depressed"
         
-        # Debugging: Log hasil prediksi
         print("Prediction:", prediction_label)
 
         return render_template('result.html', prediction=prediction_label)
     except Exception as e:
-        # Log error dan kembalikan pesan error
         print("Error occurred:", str(e))
         return f"Error: {str(e)}", 500
 
