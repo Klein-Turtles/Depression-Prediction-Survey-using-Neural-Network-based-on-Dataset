@@ -56,11 +56,11 @@ def submit():
             'Tekanan Kerja': float(request.form['work_pressure']),
             'Kepuasan Kerja': float(request.form['job_satisfaction']),
             'Durasi Tidur': request.form['sleep_duration'],
-            'Dietary Habits': request.form['dietary_habits'],
-            'Have you ever had suicidal thoughts ?': request.form['suicidal_thoughts'],
-            'Work Hours': int(request.form['work_hours']),
-            'Financial Stress': int(request.form['financial_stress']),
-            'Family History of Mental Illness': request.form['family_history']
+            'Kebiasaan Makan': request.form['dietary_habits'],
+            'Apakah anda pernah berfikir untuk bunuh diri ?': request.form['suicidal_thoughts'],
+            'Jam Kerja': int(request.form['work_hours']),
+            'Stres Keuangan': int(request.form['financial_stress']),
+            'Keluarga yang pernah mengalami kelainan mental': request.form['family_history']
         }
 
         print("Input data:", input_data)
