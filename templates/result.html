@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction Result</title>
+    <title>Hasil Prediksi</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Prediction Result</h1>
+        <h1>Hasil Prediksi</h1>
         <div class="result-box">
-            <p>Your prediction result is:</p>
+            <p>Hasil prediksi Anda adalah:</p>
             <h2><strong>{{ prediction }}</strong></h2>
-            {% if prediction == "Not Depressed" %}
-                <p>Great news! You are not predicted to be experiencing depression. Keep maintaining your mental health.</p>
-            {% elif prediction == "Depressed" %}
-                <p>It seems that you may be experiencing symptoms of depression. Please consider reaching out to a mental health professional for support.</p>
+            {% if prediction == "Tidak Stres" %}
+                <p>Kabar baik! Anda diprediksi tidak mengalami stres.</p>
+            {% elif prediction == "Stres" %}
+                <p>Tampaknya Anda mungkin mengalami stres. Pertimbangkan untuk mencari dukungan.</p>
             {% else %}
-                <p>Please consult a professional for a more accurate assessment.</p>
+                <p>Silakan konsultasikan dengan psikolog untuk penilaian yang lebih akurat.</p>
             {% endif %}
         </div>
-        <a class="back-button" href="/">Go Back</a>
+        <a class="back-button" href="/">Kembali</a>
     </div>
 </body>
 </html>
