@@ -1,64 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survey on Mental Health</title>
+    <title>Survei Kesehatan Mental</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Survey on Mental Health</h1>
+        <h1>Survei Kesehatan Mental</h1>
         <form action="/submit" method="post">
-            <label for="gender">Gender:</label>
+            <label for="gender">Jenis Kelamin:</label>
             <select name="gender" id="gender" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
             </select>
 
-            <label for="age">Age:</label>
+            <label for="age">Usia:</label>
             <input type="number" name="age" id="age" required>
 
-            <label for="work_pressure">Work Pressure (1-5):</label>
+            <label for="work_pressure">Tekanan Kerja (1-5):</label>
             <input type="number" name="work_pressure" id="work_pressure" min="1" max="5" required>
 
-            <label for="job_satisfaction">Job Satisfaction (1-5):</label>
+            <label for="job_satisfaction">Kepuasan Kerja (1-5):</label>
             <input type="number" name="job_satisfaction" id="job_satisfaction" min="1" max="5" required>
 
-            <label for="sleep_duration">Sleep Duration:</label>
+            <label for="sleep_duration">Durasi Tidur:</label>
             <select name="sleep_duration" id="sleep_duration" required>
-                <option value="Less than 5 hours">Less than 5 hours</option>
-                <option value="5-6 hours">5-6 hours</option>
-                <option value="7-8 hours">7-8 hours</option>
-                <option value="More than 8 hours">More than 8 hours</option>
+                <option value="Kurang dari 5 jam">Kurang dari 5 jam</option>
+                <option value="5-6 jam">5-6 jam</option>
+                <option value="7-8 jam">7-8 jam</option>
+                <option value="Lebih dari 8 jam">Lebih dari 8 jam</option>
             </select>
 
-            <label for="dietary_habits">Dietary Habits:</label>
+            <label for="dietary_habits">Kebiasaan Makan:</label>
             <select name="dietary_habits" id="dietary_habits" required>
-                <option value="Healthy">Healthy</option>
-                <option value="Moderate">Moderate</option>
-                <option value="Unhealthy">Unhealthy</option>
+                <option value="Sehat">Sehat</option>
+                <option value="Sedang">Sedang</option>
+                <option value="Tidak Sehat">Tidak Sehat</option>
             </select>
 
-            <label for="suicidal_thoughts">Have you ever had suicidal thoughts?</label>
+            <label for="suicidal_thoughts">Apakah Anda pernah memiliki pikiran untuk bunuh diri?</label>
             <select name="suicidal_thoughts" id="suicidal_thoughts" required>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="Ya">Ya</option>
+                <option value="Tidak">Tidak</option>
             </select>
 
-            <label for="work_hours">Work Hours:</label>
+            <label for="work_hours">Jam Kerja:</label>
             <input type="number" name="work_hours" id="work_hours" required>
 
-            <label for="financial_stress">Financial Stress (1-5):</label>
+            <label for="financial_stress">Stres Keuangan (1-5):</label>
             <input type="number" name="financial_stress" id="financial_stress" min="1" max="5" required>
 
-            <label for="family_history">Family History of Mental Illness:</label>
+            <label for="family_history">Riwayat Keluarga dengan Gangguan Mental:</label>
             <select name="family_history" id="family_history" required>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
+                <option value="Ya">Ya</option>
+                <option value="Tidak">Tidak</option>
             </select>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Kirim</button>
         </form>
     </div>
 </body>
