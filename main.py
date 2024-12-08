@@ -75,13 +75,13 @@ def submit():
 
         with torch.no_grad():
             prediction = model(input_tensor)
-            prediction_label = "Depressed" if prediction.item() > 0.5 else "Not Depressed"
+            prediction_label = "Depresi" if prediction.item() > 0.5 else "Tidak Depresi"
         
-        print("Prediction:", prediction_label)
+        print("Prediksi:", prediction_label)
 
         return render_template('result.html', prediction=prediction_label)
     except Exception as e:
-        print("Error occurred:", str(e))
+        print("Ditemukan Error:", str(e))
         return f"Error: {str(e)}", 500
 
 if __name__ == '__main__':
