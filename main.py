@@ -28,7 +28,7 @@ class NeuralNetwork(nn.Module):
         return x
 
 def load_model():
-    model = NeuralNetwork(input_size=84) 
+    model = NeuralNetwork(input_size=84)  # Ubah sesuai jumlah fitur
     model.load_state_dict(torch.load(MODEL_PATH))
     model.eval()
     return model
@@ -44,45 +44,35 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    try:
-        print("Received POST request with form data:", request.form)
+    model = load_model()
+    preprocessor = load_preprocessor()
 
-        model = load_model()
-        preprocessor = load_preprocessor()
+    input_data = {
+        'Gender': request.form['gender'],
+        'Age': int(request.form['age']),
+        'Work Pressure': float(request.form['work_pressure']),
+        'Job Satisfaction': float(request.form['job_satisfaction']),
+        'Sleep Duration': request.form['sleep_duration'],
+        'Dietary Habits': request.form['dietary_habits'],
+        'Have you ever had suicidal thoughts ?': request.form['suicidal_thoughts'],
+        'Work Hours': int(request.form['work_hours']),
+        'Financial Stress': int(request.form['financial_stress']),
+        'Family History of Mental Illness': request.form['family_history']
+    }
 
-        input_data = {
-            'Jenis Kelamin': request.form['gender'],
-            'Umur': int(request.form['age']),
-            'Tekanan Kerja': float(request.form['work_pressure']),
-            'Kepuasan Kerja': float(request.form['job_satisfaction']),
-            'Durasi Tidur': request.form['sleep_duration'],
-            'Kebiasaan Makan': request.form['dietary_habits'],
-            'Apakah anda pernah berfikir untuk bunuh diri ?': request.form['suicidal_thoughts'],
-            'Jam Kerja': int(request.form['work_hours']),
-            'Stres Keuangan': int(request.form['financial_stress']),
-            'Riwayat Keluarga dengan Gangguan Mental': request.form['family_history']
-        }
+    input_df = pd.DataFrame([input_data])
+    processed_input = preprocessor.transform(input_df)
 
-        print("Input data:", input_data)
+    if hasattr(processed_input, "toarray"):
+        processed_input = processed_input.toarray()
 
-        input_df = pd.DataFrame([input_data])
-        processed_input = preprocessor.transform(input_df)
+    input_tensor = torch.tensor(processed_input, dtype=torch.float32)
 
-        if hasattr(processed_input, "toarray"):
-            processed_input = processed_input.toarray()
-
-        input_tensor = torch.tensor(processed_input, dtype=torch.float32)
-
-        with torch.no_grad():
-            prediction = model(input_tensor)
-            prediction_label = "Depresi" if prediction.item() > 0.5 else "Tidak Depresi"
-        
-        print("Prediksi:", prediction_label)
-
-        return render_template('result.html', prediction=prediction_label)
-    except Exception as e:
-        print("Ditemukan Error:", str(e))
-        return f"Error: {str(e)}", 500
+    with torch.no_grad():
+        prediction = model(input_tensor)
+        prediction_label = "Depresi" if prediction.item() > 0.5 else "Tidak Depresi"
+    
+    return render_template('result.html', prediction=prediction_label)
 
 if __name__ == '__main__':
     app.run(debug=True)
