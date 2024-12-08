@@ -1,16 +1,16 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4; /* Warna latar belakang yang lembut */
+    background-color: #f4f4f4; 
     margin: 0;
     padding: 0;
 }
 
 .container {
     width: 50%;
-    margin: 50px auto; /* Menambahkan margin atas untuk jarak dari atas */
+    margin: 50px auto;
     background: white;
-    padding: 30px; /* Menambahkan padding untuk ruang di dalam */
-    border-radius: 10px; /* Membuat sudut lebih bulat */
+    padding: 30px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -22,8 +22,8 @@ h1 {
 label {
     display: block;
     margin: 10px 0 5px;
-    font-weight: bold; /* Menebalkan label */
-    color: #555; /* Warna label yang lebih gelap */
+    font-weight: bold;
+    color: #555; 
 }
 
 input[type="number"],
@@ -33,44 +33,44 @@ select {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    transition: border-color 0.3s; /* Efek transisi saat fokus */
+    transition: border-color 0.3s; 
 }
 
 input[type="number"]:focus,
 select:focus {
-    border-color: #007bff; /* Warna border saat fokus */
+    border-color: #007bff; 
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #5cb85c; /* Warna tombol */
+    background-color: #5cb85c; 
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px; /* Ukuran font tombol */
+    font-size: 16px; 
 }
 
 button:hover {
-    background-color: #4cae4c; /* Warna tombol saat hover */
+    background-color: #4cae4c; 
 }
 
 a {
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: #007bff; /* Warna link */
+    color: #007bff;
     text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline; /* Garis bawah saat hover */
+    text-decoration: underline;
 }
 
 .result-box {
-    background-color: #e7f3fe; /* Warna latar belakang untuk hasil */
-    border: 1px solid #b3d7ff; /* Border untuk hasil */
+    background-color: #e7f3fe;
+    border: 1px solid #b3d7ff;
     border-radius: 5px;
     padding: 20px;
     margin: 20px 0;
@@ -78,7 +78,7 @@ a:hover {
 }
 
 .result-box h2 {
-    color: #31708f; /* Warna teks untuk hasil */
+    color: #31708f; 
 }
 
 .back-button {
@@ -86,7 +86,7 @@ a:hover {
     text-align: center;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #007bff; /* Warna tombol kembali */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -94,5 +94,5 @@ a:hover {
 }
 
 .back-button:hover {
-    background-color: #0056b3; /* Warna tombol kembali saat hover */
+    background-color: #0056b3;
 }
