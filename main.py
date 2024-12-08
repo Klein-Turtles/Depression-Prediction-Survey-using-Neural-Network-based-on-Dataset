@@ -60,7 +60,7 @@ def submit():
             'Apakah anda pernah berfikir untuk bunuh diri ?': request.form['suicidal_thoughts'],
             'Jam Kerja': int(request.form['work_hours']),
             'Stres Keuangan': int(request.form['financial_stress']),
-            'Keluarga yang pernah mengalami kelainan mental': request.form['family_history']
+            'Riwayat Keluarga dengan Gangguan Mental': request.form['family_history']
         }
 
         print("Input data:", input_data)
